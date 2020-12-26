@@ -1,0 +1,1 @@
+mysql -uroot -p123456 -D mianmian < /home/hmmm-backend/db/mianmian.sql
