@@ -3,13 +3,8 @@
     <el-card>
       <!-- 头部 -->
       <div class="btn_wrapper">
-        <span style="font-size: 12px; color: pink;"
-          >说明：目前支持学科和关键字条件筛选</span
-        >
-        <button
-          type="button"
-          class="el-button el-button--success el-button--small"
-        >
+        <span style="font-size: 12px; color: pink;">说明：目前支持学科和关键字条件筛选</span>
+        <button type="button" class="el-button el-button--success el-button--small">
           <i class="el-icon-edit"></i>
           <span>新增试题</span>
         </button>
@@ -22,9 +17,7 @@
           <el-row>
             <el-col :span="6">
               <el-form-item prop="tesID">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >学科</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">学科</label>
                 <el-select v-model="ListSelect.tesID" placeholder="请选择">
                   <el-option
                     v-for="(item, index) in list"
@@ -40,9 +33,7 @@
             </el-col>
             <el-col :span="6">
               <el-form-item prop="numIids">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >二级目录</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">二级目录</label>
                 <el-select v-model="ListSelect.numIids" placeholder="请选择">
                   <el-option
                     v-for="twoitem in twoDirectorlist"
@@ -56,9 +47,7 @@
 
             <el-col :span="6">
               <el-form-item prop="threeList">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >标签</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">标签</label>
                 <el-select v-model="ListSelect.threeList" placeholder="请选择">
                   <el-option
                     v-for="treeItem in threeDirectorlist"
@@ -71,13 +60,8 @@
             </el-col>
             <el-col :span="4" class="guanjian">
               <el-form-item class="el-iptRight" prop="searchs">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >关键字</label
-                >
-                <el-input
-                  placeholder="根据题干搜索"
-                  v-model="ListSelect.searchs"
-                ></el-input>
+                <label class="el-form-item__label" style="width: 80px;">关键字</label>
+                <el-input placeholder="根据题干搜索" v-model="ListSelect.searchs"></el-input>
                 <!-- <el-select placeholder="请选择">
                   <el-option value="1"></el-option>
                 </el-select> -->
@@ -88,9 +72,7 @@
           <el-row>
             <el-col :span="6">
               <el-form-item prop="typeQuest">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >试题类型</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">试题类型</label>
                 <el-select v-model="ListSelect.typeQuest" placeholder="请选择">
                   <el-option
                     v-for="typeItem in this.questionType"
@@ -103,9 +85,7 @@
             </el-col>
             <el-col :span="6">
               <el-form-item prop="defiy">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >难度</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">难度</label>
                 <el-select v-model="ListSelect.defiy" placeholder="请选择">
                   <el-option
                     v-for="difficultyItem in difficulty"
@@ -119,9 +99,7 @@
 
             <el-col :span="6">
               <el-form-item prop="direct">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >方向</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">方向</label>
                 <el-select v-model="ListSelect.direct" placeholder="请选择">
                   <el-option
                     v-for="(directionItem, index) in direction"
@@ -135,14 +113,12 @@
 
             <el-col :span="6">
               <el-form-item prop="creators">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >录入人</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">录入人</label>
                 <el-select v-model="ListSelect.creators" placeholder="请选择">
                   <el-option
-                    v-for="creatorItem in querestlist"
+                    v-for="creatorItem in simpleName"
                     :key="creatorItem.id"
-                    :label="creatorItem.creator"
+                    :label="creatorItem.username"
                     :value="creatorItem.id"
                   ></el-option>
                 </el-select>
@@ -153,25 +129,19 @@
           <el-row>
             <el-col :span="6">
               <el-form-item prop="customipt1">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >题目备注</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">题目备注</label>
                 <el-input class="custom_ipt" v-model="ListSelect.customipt1" />
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item prop="customipt2">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >企业简称</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">企业简称</label>
                 <el-input class="custom_ipt" v-model="ListSelect.customipt2" />
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item prop="province">
-                <label class="el-form-item__label" style="width: 80px;"
-                  >城市</label
-                >
+                <label class="el-form-item__label" style="width: 80px;">城市</label>
                 <el-select
                   v-model="ListSelect.province"
                   placeholder="请选择"
@@ -185,11 +155,7 @@
                     :value="item"
                   ></el-option>
                 </el-select>
-                <el-select
-                  v-model="ListSelect.city"
-                  placeholder="请选择"
-                  style="width: 33%;"
-                >
+                <el-select v-model="ListSelect.city" placeholder="请选择" style="width: 33%;">
                   <el-option
                     v-for="(item, index) in cityList"
                     :key="index"
@@ -200,20 +166,14 @@
               </el-form-item>
             </el-col>
             <el-col :span="6">
-              <div
-                class="el-form-item__content relative_right"
-                style="margin-left: 80px;"
-              >
+              <div class="el-form-item__content relative_right" style="margin-left: 80px;">
                 <button
                   type="button"
                   class="el-button btn1 el-button--default el-button--small"
                   @click="ClearAll"
                 >
                   <span>清除</span></button
-                ><button
-                  type="button"
-                  class="el-button btn2 el-button--primary el-button--small"
-                >
+                ><button type="button" class="el-button btn2 el-button--primary el-button--small">
                   <span>搜索</span>
                 </button>
               </div>
@@ -221,7 +181,96 @@
           </el-row>
         </div>
       </el-form>
+      <!-- 中间分割警告字条 -->
+      <el-alert type="info" show-icon :closable="false">
+        <template slot="title"> 一共{{ this.total }}条数据 </template>
+      </el-alert>
+      <!-- 表格区域 -->
+      <el-table :data="querestlist" stripe style="margin-top: 20px; ">
+        <el-table-column label="试题编号" prop="number" width="120px"></el-table-column>
+        <el-table-column label="学科" prop="subject"></el-table-column>
+        <el-table-column label="目录" prop="catalog"></el-table-column>
+        <el-table-column label="题型" v-model="questionType">
+          <template slot-scope="scope">
+            {{ questionType[scope.row.questionType].label }}
+          </template>
+        </el-table-column>
+        <el-table-column label="题干" width="280px">
+          <template slot-scope="scope">
+            <p v-html="scope.row.question"></p>
+          </template>
+        </el-table-column>
+        <el-table-column label="录入时间" width="180px">
+          <template slot-scope="scope">
+            {{ scope.row.addDate | parseTime }}
+          </template>
+        </el-table-column>
+        <el-table-column label="难度">
+          <template slot-scope="scope" v-model="difficulty">
+            {{ difficulty[scope.row.difficulty].label }}
+          </template>
+        </el-table-column>
+        <el-table-column label="录入人" prop="creator"></el-table-column>
+        <el-table-column label="操作" width="180px" class="tab_btn">
+          <template slot-scope="scope">
+            <!-- // 查看 -->
+            <el-tooltip class="item" effect="dark" content="预览" placement="top-start">
+              <el-button
+                type="primary"
+                icon="el-icon-view"
+                size="small"
+                class="radius_btn"
+                @click="questionItemClick(scope.row)"
+              ></el-button>
+            </el-tooltip>
+            <!-- 修改 -->
+            <el-tooltip class="item" effect="dark" content="修改" placement="top-start">
+              <el-button
+                type="success"
+                icon="el-icon-edit"
+                size="small"
+                class="radius_btn btn_edit"
+              ></el-button>
+            </el-tooltip>
+            <!-- 删除 -->
+            <el-tooltip class="item" effect="dark" content="删除" placement="top-start">
+              <el-button
+                type="danger"
+                icon="el-icon-delete"
+                size="small"
+                class="radius_btn btn_delete"
+              ></el-button>
+            </el-tooltip>
+            <!-- 加入精选 -->
+            <el-tooltip class="item" effect="dark" content="加入精选" placement="top-start">
+              <el-button
+                type="warning"
+                icon="el-icon-check"
+                size="small"
+                class="radius_btn btn_check"
+              ></el-button>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- 分页 -->
+
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="queryInfo.pages"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="queryInfo.pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </el-card>
+    <questions-preview
+      :previewDialogVisible="previewDialogVisible"
+      :querestItem="querestItem"
+      v-model="querestlist"
+    />
   </div>
 </template>
 
@@ -232,9 +281,16 @@ import { Directorylist } from '@/api/hmmm/directorys'
 import { Taglist } from '@/api/hmmm/tags'
 import { questionType, direction, difficulty } from '@/api/hmmm/constants'
 import { provinces, citys } from '@/api/hmmm/citys'
+import QuestionsPreview from '../components/questions-preview'
+import { simple } from '@/api/base/users'
 export default {
+  components: {
+    QuestionsPreview
+  },
   data() {
     return {
+      querestItem: {},
+      previewDialogVisible: false,
       ListSelect: {
         tesID: null,
         numIids: [],
@@ -249,21 +305,35 @@ export default {
         city: '',
         searchs: ''
       },
+      simpleName: [],
       twoDirectorlist: [],
       threeDirectorlist: [],
       list: [],
+      ListSubject: [],
       querestlist: [],
       cityList: [],
       questionType: questionType,
       direction: direction,
       difficulty: difficulty,
-      provincesList: provinces
+      provincesList: provinces,
+
+      // questionType: questionType,
+      // direction: direction,
+      // difficulty: difficulty,
+      // provincesList: provinces
+      // 查询参数对象
+      queryInfo: {
+        pages: 1,
+        pagesize: 10
+      },
+      // 总数据条数
+      total: 0
     }
   },
   created() {
     this.getUserlist()
     this.getUserquerestlist()
-    // this.getUserRandomslList()
+    this.questinsSimple()
   },
   mounted() {
     // this.getUserlist()
@@ -273,8 +343,16 @@ export default {
       const { data: res } = await list()
       try {
         this.list = res.items
+        // console.log(res.items)
+        let arr = []
+        res.items.forEach((item, index) => {
+          arr[index] = {
+            subjcetName: item.subjectName
+          }
+        })
+        this.ListSubject = arr
+        // console.log(this.ListSubject)
         // console.log('获取成功')
-        // console.log(res)
         this.getUserSubject()
         this.getUserTags()
       } catch (error) {
@@ -282,12 +360,37 @@ export default {
       }
     },
     async getUserquerestlist() {
-      const { data: res } = await querestlist()
+      const { data: res } = await querestlist(this.queryInfo)
+
       try {
         this.querestlist = res.items
+        // console.log(res)
+        // this.querestlist.push(this.questionType,this.difficulty)
+        // console.log(this.questionType.label)
+        // if (this.querestlist.questionType === this.questionType.value)
+        // {
+        //   this.querestlist.questionType = this.questionType.label
+        // }
+        // this.querestlist = this.querestlist.flat(Infinity)
+        // console.log(this.querestlist)
+        this.total = res.counts
+
+        // console.log(res.items)
       } catch (err) {
-        console.log('错误')
+        this.$message.success('获取了错误的数据值')
       }
+    },
+    // 查询页码发请求
+
+    handleSizeChange(newSize) {
+      this.queryInfo.pagesize = newSize
+      this.getUserlist()
+      this.getUserquerestlist()
+    },
+    handleCurrentChange(newPage) {
+      this.queryInfo.page = newPage
+      this.getUserlist()
+      this.getUserquerestlist()
     },
     selectExitSelectConfig() {
       this.twoDirectorlist = []
@@ -314,8 +417,22 @@ export default {
     },
     // 清空所有表单数据
     ClearAll() {
-      console.log(this.$refs.questionsRefs)
+      // console.log(this.$refs.questionsRefs)
       this.$refs.questionsRefs.resetFields()
+    },
+    async questionItemClick(val) {
+      const { data } = await detail({
+        id: val.id
+      })
+      console.log(data)
+      this.querestItem = data
+      this.previewDialogVisible = true
+      // console.log(data)
+    },
+    async questinsSimple() {
+      const { data: res } = await simple()
+      // console.log(res)
+      this.simpleName = res
     }
   },
   watch: {
@@ -375,6 +492,33 @@ export default {
     position: absolute;
     top: 0;
     right: 63px;
+  }
+}
+.cell {
+  text-align: center;
+  .radius_btn {
+    color: #409eff;
+    background: #ecf5ff;
+    border-color: #b3d8ff;
+    padding: 9px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  .btn_edit {
+    color: #67c23a;
+    background: #f0f9eb;
+    border-color: #c2e7b0;
+  }
+  .btn_delete {
+    color: #f56c6c;
+    background: #fef0f0;
+    border-color: #fbc4c4;
+  }
+  .btn_check {
+    color: #e6a23c;
+    background: #fdf6ec;
+    border-color: #f5dab1;
   }
 }
 </style>

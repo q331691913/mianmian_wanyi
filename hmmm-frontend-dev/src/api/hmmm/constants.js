@@ -22,6 +22,10 @@ export const status = [
 // 难度
 export const difficulty = [
   {
+    value:'',
+    label:''
+  },
+  {
     value: 1,
     label: '简单'
   },
@@ -37,6 +41,7 @@ export const difficulty = [
 
 // 题型
 export const questionType = [
+
   {
     value: 1,
     label: '单选'
