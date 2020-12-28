@@ -4,7 +4,11 @@
       <!-- 头部 -->
       <div class="btn_wrapper">
         <span style="font-size: 12px; color: pink;">说明：目前支持学科和关键字条件筛选</span>
-        <button type="button" class="el-button el-button--success el-button--small">
+        <button
+          type="button"
+          class="el-button el-button--success el-button--small"
+          @click="$router.push('/questions/new')"
+        >
           <i class="el-icon-edit"></i>
           <span>新增试题</span>
         </button>
@@ -173,7 +177,11 @@
                   @click="ClearAll"
                 >
                   <span>清除</span></button
-                ><button type="button" class="el-button btn2 el-button--primary el-button--small">
+                ><button
+                  type="button"
+                  @click="getUserquerestlist()"
+                  class="el-button btn2 el-button--primary el-button--small"
+                >
                   <span>搜索</span>
                 </button>
               </div>
@@ -230,6 +238,7 @@
                 icon="el-icon-edit"
                 size="small"
                 class="radius_btn btn_edit"
+                @click="$router.push('/questions/new')"
               ></el-button>
             </el-tooltip>
             <!-- 删除 -->
@@ -239,6 +248,7 @@
                 icon="el-icon-delete"
                 size="small"
                 class="radius_btn btn_delete"
+                @click="deleteQuestions(scope.row.id)"
               ></el-button>
             </el-tooltip>
             <!-- 加入精选 -->
@@ -248,6 +258,7 @@
                 icon="el-icon-check"
                 size="small"
                 class="radius_btn btn_check"
+                @click="Addchoice(scope.row.id)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -256,12 +267,13 @@
       <!-- 分页 -->
 
       <el-pagination
+        style="padding-top:20px;"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryInfo.pages"
         :page-sizes="[5, 10, 15, 20]"
         :page-size="queryInfo.pagesize"
-        layout="total, sizes, prev, pager, next, jumper"
+        layout="->,total, sizes, prev, pager, next, jumper"
         :total="total"
       >
       </el-pagination>
@@ -270,12 +282,13 @@
       :previewDialogVisible="previewDialogVisible"
       :querestItem="querestItem"
       v-model="querestlist"
+      @close="previewDialogVisible = false"
     />
   </div>
 </template>
 
 <script>
-import { querestlist, detail, randoms } from '@/api/hmmm/questions'
+import { querestlist, detail, randoms, remove, choiceAdd } from '@/api/hmmm/questions'
 import { list } from '@/api/hmmm/subjects'
 import { Directorylist } from '@/api/hmmm/directorys'
 import { Taglist } from '@/api/hmmm/tags'
@@ -283,6 +296,7 @@ import { questionType, direction, difficulty } from '@/api/hmmm/constants'
 import { provinces, citys } from '@/api/hmmm/citys'
 import QuestionsPreview from '../components/questions-preview'
 import { simple } from '@/api/base/users'
+
 export default {
   components: {
     QuestionsPreview
@@ -316,12 +330,7 @@ export default {
       direction: direction,
       difficulty: difficulty,
       provincesList: provinces,
-
-      // questionType: questionType,
-      // direction: direction,
-      // difficulty: difficulty,
-      // provincesList: provinces
-      // 查询参数对象
+      // 查询对象
       queryInfo: {
         pages: 1,
         pagesize: 10
@@ -424,7 +433,7 @@ export default {
       const { data } = await detail({
         id: val.id
       })
-      console.log(data)
+      // console.log(data)
       this.querestItem = data
       this.previewDialogVisible = true
       // console.log(data)
@@ -433,7 +442,33 @@ export default {
       const { data: res } = await simple()
       // console.log(res)
       this.simpleName = res
-    }
+    },
+    // 删除数据
+    async deleteQuestions(id) {
+      const { data: res } = await remove({
+        id
+      })
+      this.$message.success('删除成功')
+      this.getUserquerestlist()
+    },
+    async Addchoice(id) {
+      const confirmResult = await this.$confirm('此操作将该题目加入精选, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'info'
+      }).catch(err => err)
+      if (confirmResult !== 'confirm') {
+        const { data: res } = await choiceAdd({
+          id,
+          choiceState: 0
+        })
+        return this.$message.info('已经取消精选！')
+      }
+
+      this.$message.success('加入精选成功！')
+      this.getUserquerestlist()
+    },
+    searchClick() {}
   },
   watch: {
     list: {
